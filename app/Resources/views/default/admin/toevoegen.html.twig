@@ -1,0 +1,19 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Instructeur toevoegen</h1>
+
+                {{ form_start(instructeurForm,{'attr':{'novalidate': 'novalidate'}}) }}
+                {{ form_widget(instructeurForm) }}
+
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+
+                {{ form_end(instructeurForm) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

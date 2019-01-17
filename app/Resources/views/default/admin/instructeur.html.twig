@@ -1,0 +1,30 @@
+{% extends 'adminBase.html.twig' %}
+{% block body %}
+    <table class="table">
+            <tr>
+                <th>Loginnaam</th>
+                <th>Naam</th>
+                <th>Tussenvoegsel</th>
+                <th>Achternaam</th>
+                <th>Geboortenaam</th>
+                <th>Aanneem Datum</th>
+                <th>Salaris</th>
+                <th>persoonsnummer</th>
+            </tr>
+        {% for instructeur in instructeurs %}
+            <tr>
+                <td>{{ instructeur.loginnaam }}</td>
+                <td>{{ instructeur.naam }}</td>
+                <td>{{ instructeur.tussenvoegsel }}</td>
+                <td>{{ instructeur.achternaam }}</td>
+                <td>{{ instructeur.geboortedatum }}</td>
+                <td>{{ instructeur.aanneem_datum }}</td>
+                <td> € {{ instructeur.salaris }}</td>
+                <td>{{ instructeur.persoonsnummer }}</td>
+                <td> <button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/wijzigen/{{ instructeur.id }}">wijzigen</a></button><button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/verwijderen/{{ instructeur.id }}">verwijderen</a></button></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button><a href="toevoegen">toevoegen</a></button>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+html, body{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+}
+
+.navbar .navbar-inverse{
+
+    display: flex !important;
+    width: 100% !important;
+    height: 20% !important;
+    background-color: #eee !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+a{
+    text-decoration: none !important;
+    color: rgba(0,0,0,0.8) !important;
+    margin: 0 40px !important;
+}
+
+#logo{
+    width: 200px !important;
+    height: 100% !important;
+    background: rgba(0,0,0,0.3) !important;
+}
+
+h1 {
+    text-align: center;
+}
