@@ -31,7 +31,7 @@ class TrainingsvormType extends AbstractType
             ->add('naam')
             ->add('beschrijving',TextareaType::class)
             ->add('duur', TimeType::class)
-            ->add('kosten', ::class)
+            ->add('kosten', MoneyType::class)
             ->add('save', SubmitType::class)
             ->getForm();
     }

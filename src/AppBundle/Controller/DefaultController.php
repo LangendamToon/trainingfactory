@@ -20,9 +20,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/home")
+     * @Route("/adminhome")
      */
-    public function homeAction()
+    public function adminhome()
     {
         return $this->render('default/admin/adminHome.html.twig');
     }
