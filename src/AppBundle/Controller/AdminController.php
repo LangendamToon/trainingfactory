@@ -11,7 +11,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\AppBundle;
 use AppBundle\Entity\Instructeur;
+use AppBundle\Entity\Trainingsvorm;
 use AppBundle\Form\InstructeurType;
+use AppBundle\Form\TrainingsvormType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,12 +22,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class InstructeurController extends Controller
+class AdminController extends Controller
 {
     /**
      * @Route("/newIns")
      */
-    public function Action()
+    public function storeInstructeur()
     {
         $EntityManager = $this->getDoctrine()->getManager();
 
@@ -63,9 +65,9 @@ class InstructeurController extends Controller
     }
 
     /**
-     * @Route("/toevoegen")
+     * @Route("/inToevoegen")
      */
-    public function newerInstructeur(Request $request)
+    public function addInstructeur(Request $request)
     {
         $form=$this->createForm(InstructeurType::class);
 
@@ -79,15 +81,16 @@ class InstructeurController extends Controller
 
             $em->flush();
             $this->addFlash('succes', 'Instructeur toegevoegd');
+            return $this->redirectToRoute('instructeur');
         }
 
-        return $this->render('default/admin/toevoegen.html.twig',[
+        return $this->render('default/admin/inToevoegen.html.twig',[
             'instructeurForm'=>$form->createView()
         ]);
     }
 
     /**
-     * @Route("wijzigen/{Id}")
+     * @Route("inWijzigen/{Id}")
      */
     public function changeInstructeur(Request $request, $Id)
     {
@@ -105,13 +108,13 @@ class InstructeurController extends Controller
             return $this->redirectToRoute('instructeur');
         }
 
-        return $this->render('default/admin/wijzigen.html.twig', [
+        return $this->render('default/admin/inWijzigen.html.twig', [
             'instructeurForm' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/verwijderen/{Id}")
+     * @Route("/inVerwijderen/{Id}")
      */
     public function deleteInstructeur(Request $request, $Id)
     {
@@ -128,5 +131,90 @@ class InstructeurController extends Controller
 
         return $this->redirectToRoute('instructeur');
     }
+
+    /**
+     * @Route("/trainingsvorm", name="trainingsvorm")
+     */
+    public function showTrainingsvorm()
+    {
+        $trainingsvorm = $this->getDoctrine()
+            ->getRepository(Trainingsvorm::class)
+            ->findAll();
+
+        return $this->render('default/admin/trainingsvorm.html.twig', [
+            'trainingsvormen'=>$trainingsvorm
+        ]);
+    }
+
+    /**
+     * @Route("/trToevoegen")
+     */
+    public function addTrainingsvorm(Request $request)
+    {
+        $form=$this->createForm(TrainingsvormType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $trainingsvorm = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($trainingsvorm);
+
+            $em->flush();
+            $this->addFlash('succes', 'trainingsvorm toegevoegd');
+            return $this->redirectToRoute('trainingsvorm');
+        }
+
+        return $this->render('default/admin/trToevoegen.html.twig',[
+            'trainingsvormForm'=>$form->createView()
+        ]);
+
+    }
+
+    /**
+     * @Route("trWijzigen/{Id}")
+     */
+    public function changeTrainingsvorm(Request $request, $Id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trainingsvorm = $em->getRepository('AppBundle:Trainingsvorm')->find($Id);
+
+        $form = $this->createForm(TrainingsvormType::class, $trainingsvorm);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->flush();
+
+            return $this->redirectToRoute('trainingsvorm');
+        }
+
+        return $this->render('default/admin/trWijzigen.html.twig', [
+            'trainingsvormForm' => $form->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("/trVerwijderen/{Id}")
+     */
+    public function deleteTrainingsvorm(Request $request, $Id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository('AppBundle:Trainingsvorm')->find($Id);
+
+        if (!$post) {
+            return $this->redirectToRoute('trainingsvorm');
+        }
+
+        $em->remove($post);
+        $em->flush();
+
+        return $this->redirectToRoute('trainingsvorm');
+    }
+
 
 }

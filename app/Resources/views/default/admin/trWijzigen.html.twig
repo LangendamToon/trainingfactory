@@ -1,0 +1,16 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Trainingsvorm toevoegen</h1>
+
+                {{ form_start(trainingsvormForm,{'attr':{'novalidate': 'novalidate'}}) }}
+                {{ form_widget(trainingsvormForm) }}
+                {{ form_end(trainingsvormForm) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

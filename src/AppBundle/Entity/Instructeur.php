@@ -17,6 +17,21 @@ use Doctrine\ORM\Mapping as ORM;
 class Instructeur
 {
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -43,13 +58,13 @@ class Instructeur
      */
     private $achternaam;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="date")
      */
     private $geboortedatum;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="date")
      */
-    private $aanneem_datum;
+    private $aanneemdatum;
     /**
      * @ORM\Column(type="string")
      */
@@ -158,18 +173,22 @@ class Instructeur
     /**
      * @return mixed
      */
-    public function getAanneemDatum()
+    public function getAanneemdatum()
     {
-        return $this->aanneem_datum;
+        return $this->aanneemdatum;
     }
 
     /**
-     * @param mixed $aanneem_datum
+     * @param mixed $aanneemdatum
      */
-    public function setAanneemDatum($aanneem_datum)
+    public function setAanneemdatum($aanneemdatum)
     {
-        $this->aanneem_datum = $aanneem_datum;
+        $this->aanneemdatum = $aanneemdatum;
     }
+
+    /**
+     * @return mixed
+     */
 
     /**
      * @return mixed

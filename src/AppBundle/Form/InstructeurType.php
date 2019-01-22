@@ -29,9 +29,7 @@ class InstructeurType extends AbstractType
             ->add('naam')
             ->add('tussenvoegsel')
             ->add('achternaam')
-            ->add('geboortedatum',BirthdayType::class, [
-            'widget' => 'single_text',
-            'format' => 'dd-MM-yyyy',])
+            ->add('geboortedatum', BirthdayType::class)
             ->add('aanneem_datum', BirthdayType::class)
             ->add('salaris', MoneyType::class)
             ->add('persoonsnummer');

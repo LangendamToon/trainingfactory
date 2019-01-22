@@ -1,0 +1,21 @@
+{%  extends 'adminBase.html.twig' %}
+{% block body %}
+<table class="table ta">
+    <tr>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Duur</th>
+        <th>Kosten</th>
+    </tr>
+    {% for trainingsvorm in trainingsvormen %}
+    <tr>
+        <td>{{ trainingsvorm.naam }}</td>
+        <td>{{ trainingsvorm.beschrijving }}</td>
+        <td>{{ trainingsvorm.duur|date('h:i') }}</td>
+        <td>{{ trainingsvorm.kosten|number_format(2, ',') }}</td>
+        <td><button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/trWijzigen/{{ trainingsvorm.id }}">wijzigen</a></button><button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/trVerwijderen/{{ trainingsvorm.id }}">verwijderen</a></button></td>
+    </tr>
+    {% endfor %}
+</table>
+    <a href="trToevoegen"><button>toevoegen</button></a>
+{% endblock %}

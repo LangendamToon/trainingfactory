@@ -17,14 +17,14 @@
                 <td>{{ instructeur.naam }}</td>
                 <td>{{ instructeur.tussenvoegsel }}</td>
                 <td>{{ instructeur.achternaam }}</td>
-                <td>{{ instructeur.geboortedatum }}</td>
-                <td>{{ instructeur.aanneem_datum }}</td>
-                <td> € {{ instructeur.salaris }}</td>
+                <td>{{ instructeur.geboortedatum|date('d-m-Y') }}</td>
+                <td>{{ instructeur.aanneemdatum|date('d-m-Y') }}</td>
+                <td> € {{ instructeur.salaris|number_format(2) }}</td>
                 <td>{{ instructeur.persoonsnummer }}</td>
-                <td> <button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/wijzigen/{{ instructeur.id }}">wijzigen</a></button><button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/verwijderen/{{ instructeur.id }}">verwijderen</a></button></td>
+                <td> <button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/inWijzigen/{{ instructeur.id }}">wijzigen</a></button><button type="button" class="btn btn-link"><a href="http://localhost/web/app_dev.php/inVerwijderen/{{ instructeur.id }}">verwijderen</a></button></td>
             </tr>
         {% endfor %}
     </table>
-    <button><a href="toevoegen">toevoegen</a></button>
+    <a href="inToevoegen"><button>toevoegen</button></a>
 
 {% endblock %}
